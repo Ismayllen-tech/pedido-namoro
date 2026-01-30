@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pedido de Namoro</title>
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <h1 id="title">Quer namorar comigo?</h1>
+      <p id="subtitle">Você aceita ser minha namorada/namorado?</p>
+
+      <div class="actions">
+        <button id="yesBtn" class="btn primary">Sim 💖</button>
+        <button id="noBtn" class="btn ghost">Quase... talvez depois</button>
+      </div>
+
+      <div id="after" class="after hidden">
+        <p>Eu sabia que você diria sim! 🎉</p>
+        <p class="small">Compartilhe este momento ou personalize esta página como quiser.</p>
+      </div>
+    </div>
+  </main>
+
+  <audio id="music" src="assets/music.mp3" preload="auto"></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script src="src/script.js"></script>
+</body>
+</html>
