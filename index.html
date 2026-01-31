@@ -8,7 +8,27 @@
 </head>
 <body>
   <main class="container">
-    <div class="card">
+
+    <!-- TELA 1: descrição do momento -->
+    <section id="first-screen" class="card screen">
+      <h1>Um momento especial</h1>
+      <p class="lead">
+        Hoje é um dia que eu quero guardar pra sempre. Quero celebrar cada detalhe do seu sorriso,
+        do jeito que você ri e da forma doce como cuida de quem está ao seu redor. Este momento foi pensado
+        com carinho para te mostrar o quanto você é importante pra mim.
+      </p>
+
+      <p class="guide">
+        Se estiver disposta a seguir para o Próximo passo, clique no botão abaixo
+      </p>
+
+      <div class="actions">
+        <button id="nextBtn" class="btn primary">Próximo passo</button>
+      </div>
+    </section>
+
+    <!-- TELA 2: pergunta -->
+    <section id="second-screen" class="card screen hidden">
       <h1 id="title">Quer namorar comigo?</h1>
       <p id="subtitle">Você aceita ser minha namorada/namorado?</p>
 
@@ -21,7 +41,8 @@
         <p>Eu sabia que você diria sim! 🎉</p>
         <p class="small">Compartilhe este momento ou personalize esta página como quiser.</p>
       </div>
-    </div>
+    </section>
+
   </main>
 
   <audio id="music" src="assets/music.mp3" preload="auto"></audio>
