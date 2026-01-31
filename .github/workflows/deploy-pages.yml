@@ -5,12 +5,17 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # garante que o GITHUB_TOKEN esteja configurado no git remote
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
