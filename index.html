@@ -9,8 +9,38 @@
 <body>
   <main class="container">
 
-    <!-- TELA 1: descrição do momento -->
-    <section id="first-screen" class="card screen">
+    <!-- OVERLAY (fallback, caso precise) -->
+    <div id="autoplay-overlay" class="autoplay-overlay hidden" aria-hidden="true">
+      <div class="overlay-card">
+        <p>Toque na tela para ouvir a surpresa 🎵</p>
+        <button id="overlayPlay" class="btn primary">Tocar agora</button>
+      </div>
+    </div>
+
+    <!-- TELA GIFT: papel dobrado + laço -->
+    <section id="gift-screen" class="card screen gift-screen">
+      <div class="gift-visual">
+        <div class="paper" id="paper" aria-hidden="true">
+          <div class="half left"></div>
+          <div class="half right"></div>
+          <div class="paper-inner">
+            <div class="note">Uma surpresa...</div>
+          </div>
+        </div>
+
+        <div class="ribbon" id="ribbon" aria-hidden="true">
+          <div class="bow">
+            <span class="loop left"></span>
+            <span class="knot"></span>
+            <span class="loop right"></span>
+          </div>
+          <button id="startBtn" class="btn start">Iniciar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 1: descrição do momento (aparece após o gift abrir) -->
+    <section id="first-screen" class="card screen hidden">
       <h1>Um momento especial</h1>
       <p class="lead">
         Hoje é um dia que eu quero guardar pra sempre. Quero celebrar cada detalhe do seu sorriso,
@@ -19,7 +49,7 @@
       </p>
 
       <p class="guide">
-        Se tiver certeza, clique no botão abaixo
+        Se estiver disposta a seguir para o Próximo passo, clique no botão abaixo
       </p>
 
       <div class="actions">
@@ -30,7 +60,7 @@
     <!-- TELA 2: pergunta -->
     <section id="second-screen" class="card screen hidden">
       <h1 id="title">Quer namorar comigo?</h1>
-      <p id="subtitle">💖💖💖💖💖💖💖💖💖</p>
+      <p id="subtitle">Você aceita ser minha namorada/namorado?</p>
 
       <div class="actions">
         <button id="yesBtn" class="btn primary">Sim 💖</button>
@@ -45,7 +75,8 @@
 
   </main>
 
-  <audio id="music" src="assets/music.mp3" preload="auto"></audio>
+  <!-- audio: será iniciado pelo botão "Iniciar" -->
+  <audio id="music" src="assets/music.mp3" preload="auto" playsinline></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script src="src/script.js"></script>
