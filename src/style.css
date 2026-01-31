@@ -1,7 +1,7 @@
 :root{
   --bg1: #ff9a9e;
   --bg2: #fad0c4;
-  --card-bg: rgba(255,255,255,0.92);
+  --card-bg: rgba(255,255,255,0.96);
   --accent: #ff6b81;
   --muted: #666;
 }
@@ -17,18 +17,23 @@ body{
   padding:1rem;
 }
 
-.container{width:100%;max-width:720px}
+.container{width:100%;max-width:720px;padding:0 1rem}
 
+/* Cartões / telas */
 .card{
   background:var(--card-bg);
   padding:2rem;
   border-radius:14px;
   text-align:center;
   box-shadow:0 12px 36px rgba(0,0,0,0.12);
+  transition: transform 260ms ease, opacity 260ms ease;
 }
 
-h1{margin:0 0 0.25rem;font-size:1.8rem}
-p{margin:0 0 1rem;color:var(--muted)}
+.screen + .screen { margin-top:1rem }
+
+h1{margin:0 0 0.5rem;font-size:1.6rem}
+.lead{margin:0 0 1rem;color:var(--muted);line-height:1.45;font-size:1.02rem}
+.guide{margin:0 0 1.25rem;font-weight:600}
 
 .actions{display:flex;gap:0.75rem;justify-content:center;margin-top:1rem}
 .btn{padding:0.6rem 1rem;border-radius:10px;border:none;cursor:pointer;font-weight:600}
@@ -38,4 +43,19 @@ p{margin:0 0 1rem;color:var(--muted)}
 .after{margin-top:1.25rem}
 .hidden{display:none}
 
-.small{font-size:0.85rem;color:var(--muted);margin-top:0.5rem}
+/* animação simples de entrada */
+.screen-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.screen-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* responsividade */
+@media (max-width:420px){
+  .card{padding:1.25rem}
+  h1{font-size:1.25rem}
+  .lead{font-size:0.98rem}
+}
