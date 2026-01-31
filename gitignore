@@ -1,0 +1,19 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Node (se usar)
+node_modules/
+dist/
+build/
+
+# arquivos de configuração locais
+.env
+.env.local
+
+# IDEs/editors
+.vscode/
+.idea/
+
+# Outras
+coverage/
