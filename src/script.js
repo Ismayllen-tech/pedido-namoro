@@ -1,62 +1,72 @@
-// script.js — substitua o arquivo existente por este
-document.addEventListener('DOMContentLoaded', () => {
-  const startBtn = document.getElementById('startBtn');
-  const giftScreen = document.getElementById('gift-screen');
-  const firstScreen = document.getElementById('first-screen');
-  const nextBtn = document.getElementById('nextBtn');
-  const secondScreen = document.getElementById('second-screen');
-  const music = document.getElementById('music');
-  const overlay = document.getElementById('autoplay-overlay');
+/* Fundo em madeira para as "telas" (sections .screen)
+   Coloque a imagem em: assets/wood-bg.jpg (a partir de src/style.css use ../assets/wood-bg.jpg)
+*/
 
-  // 1) remover o overlay de autoplay (não deve aparecer)
-  if (overlay && overlay.parentNode) {
-    overlay.parentNode.removeChild(overlay);
+:root{
+  --screen-bg-image: url('../assets/wood-bg.jpg');
+  --screen-overlay: rgba(255,255,255,0.86); /* ajuste para clarear/fazer contraste */
+  --card-max-width: 720px;
+}
+
+/* Aplica o fundo às telas */
+.screen{
+  position: relative; /* necessário para o overlay pseudo-elemento */
+  background-image: var(--screen-bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2.5rem;
+  box-sizing: border-box;
+  color: #222;
+  min-height: 60vh; /* ajuste conforme preferir */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Overlay semitransparente para melhorar leitura do conteúdo sobre a imagem */
+.screen::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(var(--screen-overlay), var(--screen-overlay));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Garante que o conteúdo da "card" fique acima do overlay */
+.screen > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* Opcional: limitar largura das cards para melhor aparência */
+.card{
+  max-width: var(--card-max-width);
+  width: 100%;
+  margin: 0 auto;
+  background: transparent; /* já temos overlay, então a card pode ser transparente */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Se quiser que o visual do "papel" dentro do gift não fique opaco pelo overlay,
+   aumente o z-index desse elemento específico para ficar acima do overlay e do card */
+.gift-screen .paper,
+.gift-screen .paper-inner{
+  position: relative;
+  z-index: 2;
+  background: rgba(255,255,255,0.95); /* opcional: papel claro por cima do fundo */
+  border-radius: 8px;
+}
+
+/* Ajustes responsivos simples */
+@media (max-width: 600px){
+  .screen {
+    padding: 1.25rem;
+    min-height: 55vh;
   }
-
-  // 2) iniciar: tocar música e ir para a primeira tela
-  startBtn?.addEventListener('click', async () => {
-    // tocar música (user gesture -> normalmente permitido)
-    if (music) {
-      try {
-        await music.play();
-      } catch (err) {
-        // falha em tocar: apenas logue, não bloqueie navegação
-        console.warn('Falha ao reproduzir áudio:', err);
-      }
-    }
-
-    // fechar tela do presente e abrir primeira tela
-    giftScreen?.classList.add('hidden');
-    firstScreen?.classList.remove('hidden');
-  });
-
-  // 3) próximo: ir para a segunda tela
-  nextBtn?.addEventListener('click', () => {
-    firstScreen?.classList.add('hidden');
-    secondScreen?.classList.remove('hidden');
-  });
-
-  // 4) ações da segunda tela
-  const yesBtn = document.getElementById('yesBtn');
-  const noBtn = document.getElementById('noBtn');
-  const after = document.getElementById('after');
-
-  yesBtn?.addEventListener('click', () => {
-    // mostrar mensagem de confirmação
-    after?.classList.remove('hidden');
-
-    // celebrar com confete, se lib estiver carregada
-    if (window.confetti) {
-      confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
-    }
-  });
-
-  noBtn?.addEventListener('click', () => {
-    // comportamento simples para "não" (pode ser personalizado)
-    alert('Tudo bem 😊 Você pode voltar quando quiser.');
-  });
-});
+  .card { padding: 1rem; }
+}
