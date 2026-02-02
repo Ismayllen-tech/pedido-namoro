@@ -2,42 +2,75 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Pedido de Namoro</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./src/style.css" />
 </head>
-
 <body>
-
   <main class="container">
 
-    <!-- TELA 0 -->
-    <section id="gift-screen" class="screen">
-      <h1>🎁 Uma surpresa</h1>
-      <button id="startBtn">Iniciar</button>
+    <!-- TELA GIFT: papel dobrado + laço -->
+    <section id="gift-screen" class="card screen gift-screen">
+      <div class="gift-visual">
+        <div class="paper" id="paper" aria-hidden="true">
+          <div class="half left"></div>
+          <div class="half right"></div>
+          <div class="paper-inner">
+            <div class="note">Uma surpresa...</div>
+          </div>
+        </div>
+
+        <div class="ribbon" id="ribbon" aria-hidden="true">
+          <div class="bow">
+            <span class="loop left"></span>
+            <span class="knot"></span>
+            <span class="loop right"></span>
+          </div>
+          <button id="startBtn" class="btn start" type="button">Iniciar</button>
+        </div>
+      </div>
     </section>
 
-    <!-- TELA 1 -->
-    <section id="first-screen" class="screen hidden">
+    <!-- TELA 1: descrição do momento (aparece após o gift abrir) -->
+    <section id="first-screen" class="card screen hidden">
       <h1>Um momento especial</h1>
-      <p>
-        Esse momento foi pensado com carinho para te mostrar
-        o quanto você é importante pra mim.
+      <p class="lead">
+        Hoje é um dia que eu quero guardar pra sempre. Quero celebrar cada detalhe do seu sorriso,
+        do jeito que você ri e da forma doce como cuida de quem está ao seu redor. Este momento foi pensado
+        com carinho para te mostrar o quanto você é importante pra mim.
       </p>
-      <button id="nextBtn">Próximo passo</button>
+
+      <p class="guide">
+        Se estiver disposta a seguir para o Próximo passo, clique no botão abaixo
+      </p>
+
+      <div class="actions">
+        <button id="nextBtn" class="btn primary" type="button">Próximo passo</button>
+      </div>
     </section>
 
-    <!-- TELA 2 -->
-    <section id="second-screen" class="screen hidden">
-      <h1>Quer namorar comigo? 💖</h1>
-      <button id="yesBtn">Sim</button>
-      <button id="noBtn">Talvez depois</button>
+    <!-- TELA 2: pergunta -->
+    <section id="second-screen" class="card screen hidden">
+      <h1 id="title">Quer namorar comigo?</h1>
+      <p id="subtitle">Você aceita ser minha namorada/namorado?</p>
 
-      <p id="after" class="hidden">🎉 Eu sabia que você diria sim!</p>
+      <div class="actions">
+        <button id="yesBtn" class="btn primary" type="button">Sim 💖</button>
+        <button id="noBtn" class="btn ghost" type="button">Quase... talvez depois</button>
+      </div>
+
+      <div id="after" class="after hidden">
+        <p>Eu sabia que você diria sim! 🎉</p>
+        <p class="small">Compartilhe este momento ou personalize esta página como quiser.</p>
+      </div>
     </section>
 
   </main>
 
-  <script src="script.js"></script>
+  <!-- Música é opcional: se não existir, não quebra -->
+  <audio id="music" src="./assets/music.mp3" preload="auto" playsinline></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script src="./src/script.js"></script>
 </body>
 </html>
