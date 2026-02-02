@@ -1,72 +1,61 @@
-/* Fundo em madeira para as "telas" (sections .screen)
-   Coloque a imagem em: assets/wood-bg.jpg (a partir de src/style.css use ../assets/wood-bg.jpg)
-*/
+// src/script.js
+(() => {
+  const giftScreen = document.getElementById("gift-screen");
+  const firstScreen = document.getElementById("first-screen");
+  const secondScreen = document.getElementById("second-screen");
 
-:root{
-  --screen-bg-image: url('../assets/wood-bg.jpg');
-  --screen-overlay: rgba(255,255,255,0.86); /* ajuste para clarear/fazer contraste */
-  --card-max-width: 720px;
-}
+  const paper = document.getElementById("paper");
+  const ribbon = document.getElementById("ribbon");
 
-/* Aplica o fundo às telas */
-.screen{
-  position: relative; /* necessário para o overlay pseudo-elemento */
-  background-image: var(--screen-bg-image);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 2.5rem;
-  box-sizing: border-box;
-  color: #222;
-  min-height: 60vh; /* ajuste conforme preferir */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  const startBtn = document.getElementById("startBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
 
-/* Overlay semitransparente para melhorar leitura do conteúdo sobre a imagem */
-.screen::before{
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(var(--screen-overlay), var(--screen-overlay));
-  pointer-events: none;
-  z-index: 0;
-}
+  const after = document.getElementById("after");
+  const music = document.getElementById("music");
 
-/* Garante que o conteúdo da "card" fique acima do overlay */
-.screen > *{
-  position: relative;
-  z-index: 1;
-}
+  const show = (el) => el && el.classList.remove("hidden");
+  const hide = (el) => el && el.classList.add("hidden");
 
-/* Opcional: limitar largura das cards para melhor aparência */
-.card{
-  max-width: var(--card-max-width);
-  width: 100%;
-  margin: 0 auto;
-  background: transparent; /* já temos overlay, então a card pode ser transparente */
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  border-radius: 12px;
-  padding: 2rem;
-  box-sizing: border-box;
-}
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/* Se quiser que o visual do "papel" dentro do gift não fique opaco pelo overlay,
-   aumente o z-index desse elemento específico para ficar acima do overlay e do card */
-.gift-screen .paper,
-.gift-screen .paper-inner{
-  position: relative;
-  z-index: 2;
-  background: rgba(255,255,255,0.95); /* opcional: papel claro por cima do fundo */
-  border-radius: 8px;
-}
+  startBtn?.addEventListener("click", async () => {
+    // trava spam de clique
+    startBtn.disabled = true;
 
-/* Ajustes responsivos simples */
-@media (max-width: 600px){
-  .screen {
-    padding: 1.25rem;
-    min-height: 55vh;
-  }
-  .card { padding: 1rem; }
-}
+    // tenta tocar música (se existir)
+    music?.play().catch(() => {});
+
+    // anima presente
+    ribbon?.classList.add("untie");
+    await wait(250);
+    paper?.classList.add("open");
+
+    // espera a animação ficar bonita
+    await wait(1100);
+
+    hide(giftScreen);
+    show(firstScreen);
+  });
+
+  nextBtn?.addEventListener("click", () => {
+    hide(firstScreen);
+    show(secondScreen);
+  });
+
+  yesBtn?.addEventListener("click", () => {
+    show(after);
+
+    if (typeof confetti === "function") {
+      confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 } });
+      setTimeout(() => confetti({ particleCount: 80, spread: 120, origin: { y: 0.5 } }), 250);
+    }
+  });
+
+  noBtn?.addEventListener("click", () => {
+    const x = Math.random() * 160 - 80;
+    const y = Math.random() * 110 - 55;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+})();
