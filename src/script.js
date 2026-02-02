@@ -1,5 +1,7 @@
 // src/script.js
-(() => {
+
+document.addEventListener("DOMContentLoaded", () => {
+
   const giftScreen = document.getElementById("gift-screen");
   const firstScreen = document.getElementById("first-screen");
   const secondScreen = document.getElementById("second-screen");
@@ -18,44 +20,43 @@
   const show = (el) => el && el.classList.remove("hidden");
   const hide = (el) => el && el.classList.add("hidden");
 
-  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-  startBtn?.addEventListener("click", async () => {
-    // trava spam de clique
+  startBtn.addEventListener("click", async () => {
     startBtn.disabled = true;
 
     // tenta tocar música (se existir)
     music?.play().catch(() => {});
 
-    // anima presente
+    // animações do presente
     ribbon?.classList.add("untie");
-    await wait(250);
+    await wait(300);
     paper?.classList.add("open");
+    await wait(1000);
 
-    // espera a animação ficar bonita
-    await wait(1100);
-
+    // troca de telas
     hide(giftScreen);
     show(firstScreen);
   });
 
-  nextBtn?.addEventListener("click", () => {
+  nextBtn.addEventListener("click", () => {
     hide(firstScreen);
     show(secondScreen);
   });
 
-  yesBtn?.addEventListener("click", () => {
+  yesBtn.addEventListener("click", () => {
     show(after);
 
     if (typeof confetti === "function") {
-      confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 } });
-      setTimeout(() => confetti({ particleCount: 80, spread: 120, origin: { y: 0.5 } }), 250);
+      confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+      setTimeout(() => confetti({ particleCount: 80, spread: 110, origin: { y: 0.5 } }), 250);
     }
   });
 
-  noBtn?.addEventListener("click", () => {
-    const x = Math.random() * 160 - 80;
-    const y = Math.random() * 110 - 55;
+  noBtn.addEventListener("click", () => {
+    const x = Math.random() * 140 - 70;
+    const y = Math.random() * 100 - 50;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
-})();
+
+});
