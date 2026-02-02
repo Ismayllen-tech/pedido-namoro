@@ -4,13 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Pedido de Namoro</title>
-  <link rel="stylesheet" href="src/style.css" />
+  <link rel="stylesheet" href="./src/style.css" />
 </head>
+
 <body>
   <main class="container">
 
-
-    <!-- TELA GIFT: papel dobrado + laço -->
+    <!-- TELA GIFT -->
     <section id="gift-screen" class="card screen gift-screen">
       <div class="gift-visual">
         <div class="paper" id="paper" aria-hidden="true">
@@ -27,12 +27,12 @@
             <span class="knot"></span>
             <span class="loop right"></span>
           </div>
-          <button id="startBtn" class="btn start">Iniciar</button>
+          <button id="startBtn" class="btn start" type="button">Iniciar</button>
         </div>
       </div>
     </section>
 
-    <!-- TELA 1: descrição do momento (aparece após o gift abrir) -->
+    <!-- TELA 1 -->
     <section id="first-screen" class="card screen hidden">
       <h1>Um momento especial</h1>
       <p class="lead">
@@ -41,23 +41,21 @@
         com carinho para te mostrar o quanto você é importante pra mim.
       </p>
 
-      <p class="guide">
-        Se estiver disposta a seguir para o Próximo passo, clique no botão abaixo
-      </p>
+      <p class="guide">Se estiver disposta a seguir para o próximo passo, clique no botão abaixo.</p>
 
       <div class="actions">
-        <button id="nextBtn" class="btn primary">Próximo passo</button>
+        <button id="nextBtn" class="btn primary" type="button">Próximo passo</button>
       </div>
     </section>
 
-    <!-- TELA 2: pergunta -->
+    <!-- TELA 2 -->
     <section id="second-screen" class="card screen hidden">
       <h1 id="title">Quer namorar comigo?</h1>
       <p id="subtitle">Você aceita ser minha namorada/namorado?</p>
 
       <div class="actions">
-        <button id="yesBtn" class="btn primary">Sim 💖</button>
-        <button id="noBtn" class="btn ghost">Quase... talvez depois</button>
+        <button id="yesBtn" class="btn primary" type="button">Sim 💖</button>
+        <button id="noBtn" class="btn ghost" type="button">Quase... talvez depois</button>
       </div>
 
       <div id="after" class="after hidden">
@@ -68,10 +66,9 @@
 
   </main>
 
-  <!-- audio: será iniciado pelo botão "Iniciar" -->
-  <audio id="music" src="assets/music.mp3" preload="auto" playsinline></audio>
+  <audio id="music" src="./assets/music.mp3" preload="auto" playsinline></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <script src="src/script.js"></script>
+  <script src="./src/script.js" defer></script>
 </body>
 </html>
