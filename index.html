@@ -4,16 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Pedido de Namoro</title>
-
   <meta name="description" content="Uma surpresa especial — um pedido de namoro personalizado. Compartilhe ou personalize esta página para criar seu momento." />
-  <meta name="theme-color" content="#fff6f9" />
+  <!-- Open Graph básico -->
   <meta property="og:title" content="Pedido de Namoro" />
   <meta property="og:description" content="Uma surpresa especial — um pedido de namoro personalizado." />
   <meta property="og:type" content="website" />
-
+  <!-- Favicon (opcional) -->
   <link rel="icon" href="/favicon.ico" />
 
-  <!-- Preload CSS para melhorar o carregamento -->
+  <!-- Preload CSS com fallback para garantir carregamento rápido -->
   <link rel="preload" href="./src/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="./src/style.css"></noscript>
 </head>
@@ -21,7 +20,7 @@
   <main class="container">
 
     <!-- TELA GIFT: papel dobrado + laço -->
-    <section id="gift-screen" class="card screen gift-screen" aria-labelledby="gift-title" role="region">
+    <section id="gift-screen" class="card screen gift-screen" aria-labelledby="gift-title">
       <h1 id="gift-title" class="visually-hidden" tabindex="-1">Surpresa</h1>
 
       <div class="gift-visual" aria-hidden="false">
@@ -54,7 +53,7 @@
       </p>
 
       <p class="guide">
-        Se quiser seguir para o próximo passo, clique no botão abaixo.
+        Se estiver disposta a seguir para o Próximo passo, clique no botão abaixo
       </p>
 
       <div class="actions">
@@ -65,14 +64,14 @@
     <!-- TELA 2: pergunta -->
     <section id="second-screen" class="card screen hidden" aria-hidden="true" aria-labelledby="second-screen-title" role="region">
       <h1 id="second-screen-title" tabindex="-1">Quer namorar comigo?</h1>
-      <p id="subtitle">Você aceita namorar comigo?</p>
+      <p id="subtitle">Você aceita ser minha namorada/namorado?</p>
 
       <div class="actions">
         <button id="yesBtn" class="btn primary" type="button">Sim 💖</button>
         <button id="noBtn" class="btn ghost" type="button">Quase... talvez depois</button>
       </div>
 
-      <div id="after" class="after hidden" aria-hidden="true" tabindex="-1">
+      <div id="after" class="after hidden" aria-hidden="true">
         <p>Eu sabia que você diria sim! 🎉</p>
         <p class="small">Compartilhe este momento ou personalize esta página como quiser.</p>
       </div>
@@ -80,16 +79,18 @@
 
   </main>
 
+  <!-- Mensagem para usuários sem JS -->
   <noscript>
     <div class="noscript-message" role="status">
       <p>Esta experiência funciona melhor com JavaScript habilitado. Por favor, habilite o JavaScript para ver a surpresa.</p>
     </div>
   </noscript>
 
-  <!-- Música: sem autoplay. Adicionamos playsinline para iOS -->
-  <audio id="music" src="./assets/music.mp3" preload="auto" playsinline webkit-playsinline></audio>
+  <!-- Música: não forçar autoplay. Recomendo adicionar um botão play/pause no UI (controlado por script.js) -->
+  <audio id="music" src="./assets/music.mp3" preload="auto" playsinline aria-hidden="true"></audio>
+  <button id="toggleMusic" class="visually-hidden" type="button" aria-pressed="false" aria-controls="music">Tocar/Parar música</button>
 
-  <!-- CDN confetti (considere adicionar integrity + crossorigin se tiver o hash SRI) -->
+  <!-- CDN confetti (considere adicionar SRI integrity se souber o hash) -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
   <script src="./src/script.js" defer></script>
 </body>

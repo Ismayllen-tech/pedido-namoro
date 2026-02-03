@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startBtn.addEventListener('click', async () => {
       startBtn.disabled = true;
 
-      // Tenta tocar música se existir (user gesture => permitido)
+      // Tenta tocar música se existir (user gesture permission is present because of click)
       if (music) {
         music.play().catch(() => {});
       }
@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (yesBtn) {
     yesBtn.addEventListener('click', () => {
       show(after);
+      // se houver música e estiver pausada, manter como está (não forçamos)
       // confetti: checa disponibilidade global
       if (typeof confetti === 'function') {
         confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
@@ -181,6 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Se existir controle de música pré-definido no HTML, conecta comportamento (opcional)
   const existingToggle = document.getElementById('toggleMusic');
   if (existingToggle) {
+    // se houver elemento #toggleMusic no HTML, conecta com <audio id="music">
     existingToggle.addEventListener('click', () => {
       if (!music) return;
       if (music.paused) {
