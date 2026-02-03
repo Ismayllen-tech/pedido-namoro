@@ -4,14 +4,26 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Pedido de Namoro</title>
-  <link rel="stylesheet" href="./src/style.css" />
+  <meta name="description" content="Uma surpresa especial — um pedido de namoro personalizado. Compartilhe ou personalize esta página para criar seu momento." />
+  <!-- Open Graph básico -->
+  <meta property="og:title" content="Pedido de Namoro" />
+  <meta property="og:description" content="Uma surpresa especial — um pedido de namoro personalizado." />
+  <meta property="og:type" content="website" />
+  <!-- Favicon (opcional) -->
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Preload CSS com fallback para garantir carregamento rápido -->
+  <link rel="preload" href="./src/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="./src/style.css"></noscript>
 </head>
 <body>
   <main class="container">
 
     <!-- TELA GIFT: papel dobrado + laço -->
-    <section id="gift-screen" class="card screen gift-screen">
-      <div class="gift-visual">
+    <section id="gift-screen" class="card screen gift-screen" aria-labelledby="gift-title">
+      <h1 id="gift-title" class="visually-hidden" tabindex="-1">Surpresa</h1>
+
+      <div class="gift-visual" aria-hidden="false">
         <div class="paper" id="paper" aria-hidden="true">
           <div class="half left"></div>
           <div class="half right"></div>
@@ -26,14 +38,14 @@
             <span class="knot"></span>
             <span class="loop right"></span>
           </div>
-          <button id="startBtn" class="btn start" type="button">Iniciar</button>
+          <button id="startBtn" class="btn start" type="button" aria-controls="first-screen" aria-label="Iniciar surpresa">Iniciar</button>
         </div>
       </div>
     </section>
 
     <!-- TELA 1: descrição do momento (aparece após o gift abrir) -->
-    <section id="first-screen" class="card screen hidden">
-      <h1>Um momento especial</h1>
+    <section id="first-screen" class="card screen hidden" aria-hidden="true" aria-labelledby="first-screen-title" role="region">
+      <h1 id="first-screen-title" tabindex="-1">Um momento especial</h1>
       <p class="lead">
         Hoje é um dia que eu quero guardar pra sempre. Quero celebrar cada detalhe do seu sorriso,
         do jeito que você ri e da forma doce como cuida de quem está ao seu redor. Este momento foi pensado
@@ -45,13 +57,13 @@
       </p>
 
       <div class="actions">
-        <button id="nextBtn" class="btn primary" type="button">Próximo passo</button>
+        <button id="nextBtn" class="btn primary" type="button" aria-controls="second-screen">Próximo passo</button>
       </div>
     </section>
 
     <!-- TELA 2: pergunta -->
-    <section id="second-screen" class="card screen hidden">
-      <h1 id="title">Quer namorar comigo?</h1>
+    <section id="second-screen" class="card screen hidden" aria-hidden="true" aria-labelledby="second-screen-title" role="region">
+      <h1 id="second-screen-title" tabindex="-1">Quer namorar comigo?</h1>
       <p id="subtitle">Você aceita ser minha namorada/namorado?</p>
 
       <div class="actions">
@@ -59,7 +71,7 @@
         <button id="noBtn" class="btn ghost" type="button">Quase... talvez depois</button>
       </div>
 
-      <div id="after" class="after hidden">
+      <div id="after" class="after hidden" aria-hidden="true">
         <p>Eu sabia que você diria sim! 🎉</p>
         <p class="small">Compartilhe este momento ou personalize esta página como quiser.</p>
       </div>
@@ -67,10 +79,19 @@
 
   </main>
 
-  <!-- Música é opcional: se não existir, não quebra -->
-  <audio id="music" src="./assets/music.mp3" preload="auto" playsinline></audio>
+  <!-- Mensagem para usuários sem JS -->
+  <noscript>
+    <div class="noscript-message" role="status">
+      <p>Esta experiência funciona melhor com JavaScript habilitado. Por favor, habilite o JavaScript para ver a surpresa.</p>
+    </div>
+  </noscript>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <script src="./src/script.js"></script>
+  <!-- Música: não forçar autoplay. Recomendo adicionar um botão play/pause no UI (controlado por script.js) -->
+  <audio id="music" src="./assets/music.mp3" preload="auto" playsinline aria-hidden="true"></audio>
+  <button id="toggleMusic" class="visually-hidden" type="button" aria-pressed="false" aria-controls="music">Tocar/Parar música</button>
+
+  <!-- CDN confetti (considere adicionar SRI integrity se souber o hash) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
+  <script src="./src/script.js" defer></script>
 </body>
 </html>
